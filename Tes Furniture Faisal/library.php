@@ -82,6 +82,13 @@ class library
         $query->execute();
         return $query;
     }
+    
+    public function readSearchCategoryData(?string $search, ?string $category)
+    {
+        $sql = $this->con->prepare("SELECT * FROM products WHERE name LIKE '%".$search."%' AND category LIKE '%".$category."%'");
+        $sql->execute();
+        return $sql;
+    }
 
 }
 
