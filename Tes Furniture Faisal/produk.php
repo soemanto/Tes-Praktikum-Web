@@ -1,11 +1,18 @@
 <?php 
+error_reporting(0);
 	include("library.php");
 	$library = new library();
 	$count = $library->countData();
 	$read = $library->readData();
-	if (isset($_GET["cari"])) {
-		$read = $library->search($_GET["keyword"]);
+	if (isset($_GET["search"]) or isset($_GET["kat"])) {
+		//$read = $library->search($_GET["keyword"]);
+		if($_GET['search'] != '' || $_GET['kat'] != ''){
+			//$search = $_GET['cari'];
+			//$kategori = $_GET['kategori'];
+			$read = $library->readSearchCategoryData($_GET['search'], $_GET['kat']);
+		}
 	}
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,8 +38,8 @@
 	<div class="search">
 		<div class="container">
 			<form action="produk.php">
-				<input type="text" name="keyword" placeholder="Cari Produk">
-				<input type="hidden" name="kat" value="=">
+				<input type="text" name="search" placeholder="Cari Produk" value="<?php echo $_GET['search'] ?>">
+				<input type="hidden" name="kat" value="<?php echo $_GET['kat'] ?>">
 				<input type="submit" name="cari" value="Cari Produk">
 			</form>
 		</div>
