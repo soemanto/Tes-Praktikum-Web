@@ -10,6 +10,7 @@ error_reporting(0);
 			//$search = $_GET['cari'];
 			//$kategori = $_GET['kategori'];
 			$read = $library->readSearchCategoryData($_GET['search'], $_GET['kat']);
+			$count = $library->countsDatabySearch($_GET['search'], $_GET['kat']);
 		}
 	}
 	
