@@ -89,6 +89,16 @@ class library
         $sql->execute();
         return $sql;
     }
+    
+    public function countsDatabySearch(?string $search, ?string $category)
+    {
+        $result = $this->con->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM products WHERE name LIKE '%".$search."%' AND category LIKE '%".$category."%'"); 
+        $result->execute();
+        $result = $this->con->prepare("SELECT FOUND_ROWS()"); 
+        $result->execute();
+        $row_count = $result->fetchColumn();
+        return $row_count;
+    }
 
 }
 
